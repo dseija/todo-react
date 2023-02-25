@@ -3,11 +3,12 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import Error404Page from '../../pages/error404';
-import HomePage from '../../pages/home';
-import LoginPage from '../../pages/login';
 
-const router = createBrowserRouter(
+import Error404Page from '../pages/error404';
+import HomePage from '../pages/home';
+import LoginPage from '../pages/login';
+
+const appRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" errorElement={<Error404Page />}>
       <Route index element={<HomePage />} />
@@ -16,4 +17,4 @@ const router = createBrowserRouter(
   )
 );
 
-export default router;
+export default appRouter;
