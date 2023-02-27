@@ -7,12 +7,20 @@ import {
 import Error404Page from '../pages/error404';
 import HomePage from '../pages/home';
 import LoginPage from '../pages/login';
+import { getLoggedInUser } from '../features/user';
+
+const userLoggedInValidation = async () => {
+  const user = await getLoggedInUser();
+  if (!user) return appRouter.navigate('/signin', { replace: true });
+
+  return user;
+};
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" errorElement={<Error404Page />}>
-      <Route index element={<HomePage />} />
-      <Route path="login" element={<LoginPage />} />
+      <Route index loader={userLoggedInValidation} element={<HomePage />} />
+      <Route path="signin" element={<LoginPage />} />
     </Route>
   )
 );

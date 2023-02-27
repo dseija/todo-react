@@ -1,10 +1,12 @@
 import { combineReducers, createStore } from 'redux';
 
 import { todoReducer } from '../features/todo';
+import { userReducer } from '../features/user';
 
 const store = createStore(
   combineReducers({
     todoReducer,
+    userReducer,
   })
 );
 
