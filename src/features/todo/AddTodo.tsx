@@ -29,6 +29,7 @@ const AddTodo = () => {
           inputProps={{ 'aria-label': 'add something to do here' }}
           value={description}
           onChange={onChange}
+          autoFocus
         />
         {description && (
           <IconButton type="submit" sx={{ p: 0 }} aria-label="add">
