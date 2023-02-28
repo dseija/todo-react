@@ -6,7 +6,8 @@ import {
 
 import Error404Page from '../pages/error404';
 import HomePage from '../pages/home';
-import LoginPage from '../pages/login';
+import SigninPage from '../pages/signin';
+import SignupPage from '../pages/signup';
 import { getLoggedInUser } from '../features/user';
 
 const userLoggedInValidation = async () => {
@@ -20,7 +21,8 @@ const appRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" errorElement={<Error404Page />}>
       <Route index loader={userLoggedInValidation} element={<HomePage />} />
-      <Route path="signin" element={<LoginPage />} />
+      <Route path="signin/:action?/:status?" element={<SigninPage />} />
+      <Route path="signup" element={<SignupPage />} />
     </Route>
   )
 );
