@@ -21,7 +21,7 @@ const AddTodo = () => {
       <Paper
         component="form"
         onSubmit={onSubmit}
-        sx={{ p: 1, display: 'flex', alignItems: 'center' }}
+        sx={{ p: 1, display: 'flex', alignItems: 'center', width: '100%' }}
       >
         <InputBase
           sx={{ ml: 1, flex: 1, height: 36 }}

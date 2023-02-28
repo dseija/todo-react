@@ -1,10 +1,8 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 import { useLoaderData } from 'react-router-dom';
-import { TodoList } from '../features/todo';
-import AddTodo from '../features/todo/AddTodo';
-import { UserData } from '../features/user';
+import { UserData, UserProfile } from '../features/user';
 
-const HomePage = () => {
+const ProfilePage = () => {
   const user = useLoaderData() as UserData;
 
   return (
@@ -15,17 +13,15 @@ const HomePage = () => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          width="100%"
         >
           <Typography variant="h4" component="h2" marginBottom={4}>
-            {user.firstname}'s TODO list
+            My Profile
           </Typography>
-          <AddTodo />
-          <TodoList />
+          <UserProfile user={user} />
         </Box>
       </Container>
     </>
   );
 };
 
-export default HomePage;
+export default ProfilePage;

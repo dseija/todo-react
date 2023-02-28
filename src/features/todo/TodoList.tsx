@@ -18,7 +18,7 @@ const TodoList = () => {
           There's nothing to do yet.
         </Typography>
       )}
-      <List>
+      <List sx={{ width: '100%' }}>
         {todos.map((todo, index) => {
           const labelId = `todo-item-${todo.id || index}`;
           return (
