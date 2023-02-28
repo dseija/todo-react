@@ -18,7 +18,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from '../common/hooks';
 import { userLogin } from '../features/user';
-import { userLoginAction } from '../features/user/userActions';
+import { userLoginAction } from '../features/user';
 
 const SigninPage = () => {
   const dispatch = useAppDispatch();

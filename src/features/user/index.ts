@@ -1,3 +1,4 @@
+export * from './userActions';
 export { default as userReducer } from './userReducer';
 export * from './userHelpers';
 export * from './userService';
