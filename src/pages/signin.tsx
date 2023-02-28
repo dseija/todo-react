@@ -8,14 +8,13 @@ import {
   Container,
   FormControlLabel,
   Grid,
-  Link,
   Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from '../common/hooks';
 import { userLogin } from '../features/user';
 import { userLoginAction } from '../features/user';
@@ -128,9 +127,7 @@ const SigninPage = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signup" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
+                <NavLink to="/signup">Don't have an account? Sign Up</NavLink>
               </Grid>
             </Grid>
           </Box>

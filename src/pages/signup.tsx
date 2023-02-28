@@ -6,13 +6,12 @@ import {
   CircularProgress,
   Container,
   Grid,
-  Link,
   Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { isValidEmail } from '../common/utils';
 import { userRegister } from '../features/user';
@@ -149,9 +148,7 @@ const SignupPage = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signin" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+                <NavLink to="/signin">Already have an account? Sign in</NavLink>
               </Grid>
             </Grid>
           </Box>
