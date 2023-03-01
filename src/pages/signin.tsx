@@ -8,6 +8,7 @@ import {
   Container,
   FormControlLabel,
   Grid,
+  Link,
   Snackbar,
   TextField,
   Typography,
@@ -127,7 +128,9 @@ const SigninPage = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <NavLink to="/signup">Don't have an account? Sign Up</NavLink>
+                <Link component={NavLink} to="/signup">
+                  Don't have an account? Sign Up
+                </Link>
               </Grid>
             </Grid>
           </Box>

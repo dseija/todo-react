@@ -6,6 +6,7 @@ import {
   CircularProgress,
   Container,
   Grid,
+  Link,
   Snackbar,
   TextField,
   Typography,
@@ -148,7 +149,9 @@ const SignupPage = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <NavLink to="/signin">Already have an account? Sign in</NavLink>
+                <Link component={NavLink} to="/signin">
+                  Already have an account? Sign in
+                </Link>
               </Grid>
             </Grid>
           </Box>
