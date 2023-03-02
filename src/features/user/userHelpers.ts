@@ -1,18 +1,11 @@
-import { store } from '../../app';
-import { getUserData } from './userService';
-import { UserState } from './userTypes';
+import { cookies } from '../../common/lib';
 
-export const getUserState = () =>
-  new Promise<UserState>((resolve) =>
-    setTimeout(() => resolve(store.getState().userReducer))
-  );
+export const userHasSession = async () => {
+  return Boolean(await cookies.get('sessionToken'));
+};
 
-export const getLoggedInUser = async () => {
-  const { isLoggedIn, data } = await getUserState();
-  if (isLoggedIn && data?.username) return data;
-
-  const [err, user] = await getUserData();
-  if (err) return;
-
-  return user;
+export const getUserSessionName = async () => {
+  const firstname = await cookies.get('userFirstname');
+  const username = await cookies.get('userUsername');
+  return firstname || username;
 };

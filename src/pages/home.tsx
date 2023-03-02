@@ -3,10 +3,19 @@ import { useLoaderData } from 'react-router-dom';
 import { Layout } from '../features/layout';
 import { TodoList } from '../features/todo';
 import AddTodo from '../features/todo/AddTodo';
-import { UserData } from '../features/user';
+import { getUserSessionName, UserData, userHasSession } from '../features/user';
+
+export const homeRouteLoader =
+  (fallbackRedirect: () => Promise<void>) => async () => {
+    const userLoggedIn = await userHasSession();
+    if (!userLoggedIn) return fallbackRedirect();
+
+    const displayName = await getUserSessionName();
+    return displayName;
+  };
 
 const HomePage = () => {
-  const user = useLoaderData() as UserData;
+  const displayName = useLoaderData() as string;
 
   return (
     <>
@@ -20,7 +29,7 @@ const HomePage = () => {
             width="100%"
           >
             <Typography variant="h4" component="h2" marginBottom={4}>
-              {user.firstname}'s TODO list
+              {displayName}'s TODO list
             </Typography>
             <AddTodo />
             <TodoList />

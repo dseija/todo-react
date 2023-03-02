@@ -22,6 +22,8 @@ const SideBar = () => {
 
   const logout = () => {
     removeCookie('sessionToken');
+    removeCookie('userFirstname');
+    removeCookie('userUsername');
     dispatch(userLogoutAction());
     navigate('/signin', { replace: true });
   };

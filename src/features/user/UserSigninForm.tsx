@@ -16,6 +16,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../common/hooks';
 import { userLogin } from './userService';
 import { userLoginAction } from './userActions';
+import { USER_COOKIE_OPTIONS } from './userConstants';
 
 const UserSigninForm = () => {
   const dispatch = useAppDispatch();
@@ -35,12 +36,10 @@ const UserSigninForm = () => {
       setSubmitting(true);
       const [err, user] = await userLogin({ username, password });
       if (user && user.token) {
-        setCookie('sessionToken', user.token, {
-          sameSite: 'lax',
-          path: '/',
-          maxAge: 60 * 60 * 24 * 30,
-        });
-        delete user.token;
+        setCookie('sessionToken', user.token, USER_COOKIE_OPTIONS);
+        setCookie('userFirstname', user.firstname, USER_COOKIE_OPTIONS);
+        setCookie('userUsername', user.username, USER_COOKIE_OPTIONS);
+
         dispatch(userLoginAction(user));
         navigate('/', { replace: true });
       } else {

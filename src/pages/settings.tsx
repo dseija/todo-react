@@ -1,6 +1,15 @@
 import { Container, Box, Typography } from '@mui/material';
 import { Layout } from '../features/layout';
 import { SettingsList } from '../features/settings';
+import { userHasSession } from '../features/user';
+
+export const settingsRouteLoader =
+  (fallbackRedirect: () => Promise<void>) => async () => {
+    const userLoggedIn = await userHasSession();
+    if (!userLoggedIn) return fallbackRedirect();
+
+    return {};
+  };
 
 const SettingsPage = () => {
   return (

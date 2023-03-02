@@ -1,5 +1,13 @@
 import { Avatar, Box, Container, Typography } from '@mui/material';
-import { UserSignupForm } from '../features/user';
+import { userHasSession, UserSignupForm } from '../features/user';
+
+export const signupRouteLoader =
+  (fallbackRedirect: () => Promise<void>) => async () => {
+    const userLoggedIn = await userHasSession();
+    if (userLoggedIn) return fallbackRedirect();
+
+    return {};
+  };
 
 const SignupPage = () => {
   return (

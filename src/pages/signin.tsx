@@ -8,7 +8,15 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { UserSigninForm } from '../features/user';
+import { userHasSession, UserSigninForm } from '../features/user';
+
+export const signinRouteLoader =
+  (fallbackRedirect: () => Promise<void>) => async () => {
+    const userLoggedIn = await userHasSession();
+    if (userLoggedIn) return fallbackRedirect();
+
+    return {};
+  };
 
 const SigninPage = () => {
   const { action, status } = useParams();

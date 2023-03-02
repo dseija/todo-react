@@ -3,6 +3,7 @@ export { default as userReducer } from './userReducer';
 export * from './userHelpers';
 export * from './userService';
 export * from './userTypes';
+export * from './userConstants';
 
 export { default as UserSigninForm } from './UserSigninForm';
 export { default as UserSignupForm } from './UserSignupForm';

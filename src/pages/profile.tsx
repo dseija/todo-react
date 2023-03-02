@@ -1,7 +1,23 @@
 import { Container, Box, Typography } from '@mui/material';
 import { useLoaderData } from 'react-router-dom';
 import { Layout } from '../features/layout';
-import { UserData, UserProfile } from '../features/user';
+import {
+  getUserData,
+  UserData,
+  userHasSession,
+  UserProfile,
+} from '../features/user';
+
+export const profileRouteLoader =
+  (fallbackRedirect: () => Promise<void>) => async () => {
+    const userLoggedIn = await userHasSession();
+    if (!userLoggedIn) return fallbackRedirect();
+
+    const [err, user] = await getUserData();
+    if (err) return fallbackRedirect();
+
+    return user;
+  };
 
 const ProfilePage = () => {
   const user = useLoaderData() as UserData;
