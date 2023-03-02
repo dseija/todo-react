@@ -1,21 +1,37 @@
 import { Box, Container, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { useAppDispatch } from '../common/hooks';
 import { Layout } from '../features/layout';
-import { TodoList } from '../features/todo';
-import AddTodo from '../features/todo/AddTodo';
-import { getUserSessionName, UserData, userHasSession } from '../features/user';
+import { getTodos, Todo, TodoList } from '../features/todo';
+import { AddTodo } from '../features/todo';
+import { setTodosAction } from '../features/todo/todoActions';
+import { getUserSessionName, userHasSession } from '../features/user';
+
+interface HomeLoaderData {
+  todos: Todo[];
+  displayName: string;
+}
 
 export const homeRouteLoader =
   (fallbackRedirect: () => Promise<void>) => async () => {
     const userLoggedIn = await userHasSession();
     if (!userLoggedIn) return fallbackRedirect();
 
+    const [err, todos = []] = await getTodos();
+    if (err) console.error(err);
+
     const displayName = await getUserSessionName();
-    return displayName;
+    return { todos, displayName };
   };
 
 const HomePage = () => {
-  const displayName = useLoaderData() as string;
+  const { todos, displayName } = useLoaderData() as HomeLoaderData;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setTodosAction(todos));
+  }, [todos]);
 
   return (
     <>

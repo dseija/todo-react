@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '../../common/hooks';
 import { removeTodoAction, toggleTodoAction } from './todoActions';
+import { removeTodo, updateTodo } from './todoService';
 import { Todo } from './todoTypes';
 
 interface TodoItemProps {
@@ -20,6 +21,18 @@ interface TodoItemProps {
 const TodoItem = ({ labelId, index, todo }: TodoItemProps) => {
   const dispatch = useAppDispatch();
 
+  const toggleCompleted = () => {
+    dispatch(toggleTodoAction(index));
+
+    if (todo.id) updateTodo(todo.id, !Boolean(todo.completed));
+  };
+
+  const removeTodoItem = () => {
+    dispatch(removeTodoAction(index));
+
+    if (todo.id) removeTodo(todo.id);
+  };
+
   return (
     <ListItem
       key={labelId}
@@ -28,13 +41,13 @@ const TodoItem = ({ labelId, index, todo }: TodoItemProps) => {
         <IconButton
           edge="end"
           aria-label="remove todo"
-          onClick={() => dispatch(removeTodoAction(index))}
+          onClick={removeTodoItem}
         >
           <Icon>close</Icon>
         </IconButton>
       }
     >
-      <ListItemButton onClick={() => dispatch(toggleTodoAction(index))}>
+      <ListItemButton onClick={toggleCompleted}>
         <ListItemIcon>
           <Checkbox
             edge="start"

@@ -23,7 +23,8 @@ const TodoList = () => {
           const labelId = `todo-item-${todo.id || index}`;
           return (
             <TodoItem
-              labelId={`todo-item-${todo.id || index}`}
+              key={labelId}
+              labelId={labelId}
               index={index}
               todo={todo}
             />

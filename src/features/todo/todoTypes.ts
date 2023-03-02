@@ -5,3 +5,8 @@ export interface Todo {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface TodoIdUpdatePayload {
+  todoIndex: number;
+  id: string;
+}

@@ -1,18 +1,27 @@
 import { Icon, IconButton, InputBase, Paper } from '@mui/material';
 import { useState } from 'react';
-import { useAppDispatch } from '../../common/hooks';
-import { addTodoAction } from './todoActions';
+import { useAppDispatch, useAppSelector } from '../../common/hooks';
+import { addTodoAction, updateTodoIdAction } from './todoActions';
+import { createTodo } from './todoService';
 
 const AddTodo = () => {
+  const todos = useAppSelector((state) => state.todoReducer.present);
   const dispatch = useAppDispatch();
   const [description, setDescription] = useState('');
 
   const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
     setDescription(target.value);
 
-  const onSubmit = (e: React.SyntheticEvent<HTMLElement>) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const nextIndex = todos.length;
+
     dispatch(addTodoAction(description));
+
+    createTodo(description).then(([err, todo]) => {
+      if (!err && todo?.id) dispatch(updateTodoIdAction(nextIndex, todo.id));
+    });
+
     setDescription('');
   };
 
