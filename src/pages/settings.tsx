@@ -1,6 +1,15 @@
 import { Container, Box, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { useAppDispatch } from '../common/hooks';
 import { Layout } from '../features/layout';
-import { SettingsList } from '../features/settings';
+import {
+  DEFAULT_SETTINGS,
+  getSettings,
+  SettingsList,
+  SettingsState,
+} from '../features/settings';
+import { setSettingsAction } from '../features/settings/settingsActions';
 import { userHasSession } from '../features/user';
 
 export const settingsRouteLoader =
@@ -8,10 +17,20 @@ export const settingsRouteLoader =
     const userLoggedIn = await userHasSession();
     if (!userLoggedIn) return fallbackRedirect();
 
-    return {};
+    const [err, settings] = await getSettings();
+    if (err) console.log({ err });
+
+    return settings || DEFAULT_SETTINGS;
   };
 
 const SettingsPage = () => {
+  const settings = useLoaderData() as SettingsState;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setSettingsAction(settings));
+  }, [settings]);
+
   return (
     <>
       <Layout>

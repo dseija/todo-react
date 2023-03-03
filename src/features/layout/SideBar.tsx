@@ -11,6 +11,7 @@ import {
 import { useCookies } from 'react-cookie';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../common/hooks';
+import { clearSettings } from '../settings';
 import { userLogoutAction } from '../user';
 import { SideBarItem } from './layoutTypes';
 
@@ -24,6 +25,7 @@ const SideBar = () => {
     removeCookie('sessionToken');
     removeCookie('userFirstname');
     removeCookie('userUsername');
+    clearSettings();
     dispatch(userLogoutAction());
     navigate('/signin', { replace: true });
   };

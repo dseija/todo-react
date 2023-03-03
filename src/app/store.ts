@@ -1,6 +1,6 @@
 import { combineReducers, createStore } from 'redux';
-import { settingsReducer } from '../features/settings';
 
+import { settingsReducer } from '../features/settings';
 import { todoReducer } from '../features/todo';
 import { userReducer } from '../features/user';
 
