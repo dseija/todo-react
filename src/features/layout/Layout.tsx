@@ -1,5 +1,5 @@
 import { Box, Toolbar } from '@mui/material';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import SideBar from './SideBar';
 import TopBar from './TopBar';
 
@@ -8,11 +8,17 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <Box display="flex">
-      <TopBar />
+      <TopBar onMenuClick={toggleSidebar} />
       <Box flexShrink={0}>
-        <SideBar />
+        <SideBar isOpen={sidebarOpen} onClose={toggleSidebar} />
       </Box>
       <Box component="main" flexGrow={1}>
         <Toolbar />
