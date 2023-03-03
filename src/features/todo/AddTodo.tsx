@@ -5,7 +5,7 @@ import { addTodoAction, updateTodoIdAction } from './todoActions';
 import { createTodo } from './todoService';
 
 const AddTodo = () => {
-  const todos = useAppSelector((state) => state.todoReducer.present);
+  const todos = useAppSelector((state) => state.todoReducer);
   const dispatch = useAppDispatch();
   const [description, setDescription] = useState('');
 

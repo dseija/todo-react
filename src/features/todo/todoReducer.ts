@@ -1,5 +1,3 @@
-import undoable from 'redux-undo';
-
 import { TodoActionName, TodoActionType } from './todoActions';
 import { TODO_WITHOUT_ID_PREFIX } from './todoConstants';
 import { Todo, TodoIdUpdatePayload } from './todoTypes';
@@ -29,7 +27,7 @@ const removeTodo = (todos: Todo[], todoIndex: number) => {
   return todos.filter((_, index) => index !== todoIndex);
 };
 
-const todoReducer = undoable((todos: Todo[] = [], action: TodoActionType) => {
+const todoReducer = (todos: Todo[] = [], action: TodoActionType) => {
   switch (action.type) {
     case TodoActionName.SET_TODOS:
       return action.payload as Todo[];
@@ -49,6 +47,6 @@ const todoReducer = undoable((todos: Todo[] = [], action: TodoActionType) => {
     default:
       return todos;
   }
-});
+};
 
 export default todoReducer;

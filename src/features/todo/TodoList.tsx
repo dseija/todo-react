@@ -3,7 +3,7 @@ import { useAppSelector } from '../../common/hooks';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
-  const todos = useAppSelector((state) => state.todoReducer.present);
+  const todos = useAppSelector((state) => state.todoReducer);
 
   return (
     <>
